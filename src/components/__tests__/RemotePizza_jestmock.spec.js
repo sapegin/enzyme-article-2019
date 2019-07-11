@@ -9,9 +9,15 @@ import { fetchIngredients } from '../../services';
 
 jest.mock('../../services');
 
+afterEach(() => {
+  fetchIngredients.mockReset();
+});
+
 const ingredients = ['bacon', 'tomato', 'mozzarella', 'pineapples'];
 
 test('download ingredients from internets', async () => {
+  expect.assertions(4);
+
   fetchIngredients.mockResolvedValue({ args: { ingredients } });
 
   const wrapper = mount(<RemotePizza />);

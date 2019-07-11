@@ -8,7 +8,9 @@ import RemotePizza from '../RemotePizza';
 
 const ingredients = ['bacon', 'tomato', 'mozzarella', 'pineapples'];
 
-test.skip('download ingredients from internets', async () => {
+test('download ingredients from internets', async () => {
+  expect.assertions(4);
+
   const fetchIngredients = () =>
     Promise.resolve({
       args: { ingredients },

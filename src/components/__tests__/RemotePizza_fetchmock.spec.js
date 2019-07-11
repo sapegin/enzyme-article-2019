@@ -13,7 +13,9 @@ afterAll(() => {
   fetchMock.restore();
 });
 
-test.skip('download ingredients from internets', async () => {
+test('download ingredients from internets', async () => {
+  expect.assertions(4);
+
   fetchMock.restore().mock(/https:\/\/httpbin.org\/anything\?.*/, {
     body: { args: { ingredients } },
   });

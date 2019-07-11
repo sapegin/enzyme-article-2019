@@ -13,9 +13,12 @@ afterEach(() => {
   nock.restore();
 });
 
-test.skip('download ingredients from internets', async () => {
+test('download ingredients from internets', async () => {
+  // expect.assertions(5);
+
   const scope = nock('https://httpbin.org')
     .get('/anything')
+    .query(true)
     .reply(200, { args: { ingredients } });
 
   const wrapper = mount(<RemotePizza />);

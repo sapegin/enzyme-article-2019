@@ -6,7 +6,6 @@ export default function RemotePizza({ fetchIngredients }) {
 
   const handleCook = () => {
     fetchIngredients().then(response => {
-      console.log('RRR', response);
       setIngredients(response.args.ingredients);
     });
   };
