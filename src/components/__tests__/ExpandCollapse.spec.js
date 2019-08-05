@@ -13,18 +13,12 @@ test('button expands and collapses the content', () => {
 
   expect(wrapper.text()).not.toMatch(children);
 
-  wrapper
-    .find({ children: 'Expand' })
-    .props()
-    .onClick();
+  wrapper.find({ children: 'Expand' }).simulate('click');
 
   expect(wrapper.text()).toMatch(children);
 
   wrapper.update();
-  wrapper
-    .find({ children: 'Collapse' })
-    .props()
-    .onClick();
+  wrapper.find({ children: 'Collapse' }).simulate('click');
 
   expect(wrapper.text()).not.toMatch(children);
 });

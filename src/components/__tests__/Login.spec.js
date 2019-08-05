@@ -5,7 +5,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import Login from '../Login';
 
-// The only reliable way to test forms with Enzyme is to fire onSubmit event on the form
+// The only reliable way to test forms with Enzyme is to fire submit event on the form
 
 test('submits username and password', () => {
   const username = 'me';
@@ -15,21 +15,16 @@ test('submits username and password', () => {
 
   wrapper
     .find({ 'data-testid': 'loginForm-username' })
-    .props()
-    .onChange({ target: { value: username } });
+    .simulate('change', { target: { value: username } });
 
   wrapper
     .find({ 'data-testid': 'loginForm-password' })
-    .props()
-    .onChange({ target: { value: password } });
+    .simulate('change', { target: { value: password } });
 
   wrapper.update();
-  wrapper
-    .find({ 'data-testid': 'loginForm' })
-    .props()
-    .onSubmit({
-      preventDefault: () => {},
-    });
+  wrapper.find({ 'data-testid': 'loginForm' }).simulate('submit', {
+    preventDefault: () => {},
+  });
 
   expect(onSubmit).toHaveBeenCalledTimes(1);
   expect(onSubmit).toHaveBeenCalledWith({

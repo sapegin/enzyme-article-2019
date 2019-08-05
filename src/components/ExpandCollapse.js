@@ -20,6 +20,6 @@ export default function ExpandCollapse({ excerpt, children }) {
 }
 
 ExpandCollapse.propTypes = {
-  exceprt: PropTypes.node.isRequired,
+  excerpt: PropTypes.node.isRequired,
   children: PropTypes.node.isRequired,
 };

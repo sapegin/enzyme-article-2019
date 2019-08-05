@@ -17,10 +17,7 @@ test('download ingredients from internets', async () => {
     });
   const wrapper = mount(<RemotePizza fetchIngredients={fetchIngredients} />);
 
-  wrapper
-    .find({ children: 'Cook' })
-    .props()
-    .onClick();
+  wrapper.find({ children: 'Cook' }).simulate('click');
 
   await waitForExpect(() => {
     wrapper.update();
