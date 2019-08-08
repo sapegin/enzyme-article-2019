@@ -6,6 +6,7 @@ import { mount } from 'enzyme';
 import nock from 'nock';
 import waitForExpect from 'wait-for-expect';
 import RemotePizza from '../RemotePizza';
+import {act} from 'react-dom/test-utils'
 
 const ingredients = ['bacon', 'tomato', 'mozzarella', 'pineapples'];
 
@@ -23,13 +24,17 @@ test('download ingredients from internets', async () => {
 
   const wrapper = mount(<RemotePizza />);
 
-  wrapper.find({ children: 'Cook' }).simulate('click');
+  await act(async () => {
+    wrapper.find({ children: 'Cook' }).simulate('click');  
+  })
 
-  await waitForExpect(() => {
-    wrapper.update();
-    expect(scope.isDone()).toBe(true);
-    ingredients.forEach(ingredient => {
-      expect(wrapper.text()).toMatch(ingredient);
+  await act(async () => {
+    await waitForExpect(() => {
+      wrapper.update();
+      expect(scope.isDone()).toBe(true);
+      ingredients.forEach(ingredient => {
+        expect(wrapper.text()).toMatch(ingredient);
+      });
     });
-  });
+  })
 });
