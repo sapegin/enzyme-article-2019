@@ -6,6 +6,7 @@ import { mount } from 'enzyme';
 import fetchMock from 'fetch-mock';
 import waitForExpect from 'wait-for-expect';
 import RemotePizza from '../RemotePizza';
+import {act} from 'react-dom/test-utils'
 
 const ingredients = ['bacon', 'tomato', 'mozzarella', 'pineapples'];
 
@@ -20,9 +21,12 @@ test('download ingredients from internets', async () => {
     body: { args: { ingredients } },
   });
 
-  const wrapper = mount(<RemotePizza />);
 
-  wrapper.find({ children: 'Cook' }).simulate('click');
+  const wrapper = mount(<RemotePizza />);
+  await act(async () => {
+    wrapper.find({ children: 'Cook' }).simulate('click');  
+  })
+  
 
   await waitForExpect(() => {
     wrapper.update();
